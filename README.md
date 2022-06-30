@@ -1,24 +1,70 @@
-# README
+# Finology
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This README contains installation and API guid
 
-Things you may want to cover:
+Installation:
 
-* Ruby version
+The easiest way to set this up would be to run:
 
-* System dependencies
+```
+$ docker-compose build
+$ docker-compose up
+```
 
-* Configuration
+Since this repo has a built in docker setup
 
-* Database creation
+For local setup you need to have your postgres running and go
 
-* Database initialization
+```
+$ bundle install
+$ rake db:create db:migrate
+```
 
-* How to run the test suite
+And to run the server
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ bundle exec rails s -b 0.0.0.0
+```
 
-* Deployment instructions
+### specs
+There are a couple specs written for checking if the models work as expected
 
-* ...
+To run them:
+```
+$ bin/rails test
+```
+
+# API documentation
+
+The car model contains:
+"car_type": `string` "electric"|"two_wheel"|"sport" [required]
+"car_model": `string`
+"car_variant": `string`
+"car_year": `integer`
+
+## GET /api/v1/cars
+
+```
+curl --location --request GET 'http://localhost:3000/api/v1/cars' \
+--header 'Content-Type: application/json' \
+```
+
+## GET /api/v1/cars?type={car_type}
+
+```
+curl --location --request GET 'http://localhost:3000/api/v1/cars?type=two_wheel' \
+--header 'Content-Type: application/json'
+```
+
+## POST /api/v1/cars
+
+```
+curl --location --request POST 'http://localhost:3000/api/v1/cars' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "car_type": "electric",
+    "car_model": "Tesla",
+    "car_variant": "S",
+    "car_year": 2019
+}'
+```
