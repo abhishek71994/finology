@@ -37,9 +37,13 @@ $ bin/rails test
 # API documentation
 
 The car model contains:
+
 "car_type": `string` "electric"|"two_wheel"|"sport" [required]
+
 "car_model": `string`
+
 "car_variant": `string`
+
 "car_year": `integer`
 
 ## GET /api/v1/cars
